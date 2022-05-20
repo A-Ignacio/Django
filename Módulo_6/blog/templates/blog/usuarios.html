@@ -1,0 +1,27 @@
+{% extends "blog/layout.html" %}
+{% load static %}
+{% block content %}
+
+<div id='tabla'>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Ciudad</th>
+            <th>Telefono</th>
+        </tr>
+        {% for usuarios in data %}  
+        <tr>
+            <td>{{usuarios.nombre}}</td>
+            <td>{{usuarios.apellido}}</td>
+            <td>{{usuarios.correo}}</td>
+            <td>{{usuarios.ciudad}}</td>
+            <td>{{usuarios.telefono}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+    </div>
+    
+    {% endblock %}

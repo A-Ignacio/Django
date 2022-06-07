@@ -7,7 +7,7 @@ Esta rama contiene los elementos propios o requeridos del Módulo 6, de la Activ
 * [Tecnologias Usadas](#Tecnologias)
 * [Instalacion](#Instalacion)
 * [Consideraciones](#Consideraciones)
-* [Visualizacion del sitio web](#Visualizacion)
+
 
 <a name="Tecnologias"></a>
 ## Tecnologias

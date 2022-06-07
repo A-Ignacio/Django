@@ -1,0 +1,14 @@
+{% extends "blog/layout.html" %}
+{% load static %}
+
+{% block content%}
+<div id="contenedor-qs">
+    <div id="q-s" class="p-3  bg-dark text-white opacity-75" style="margin: 20px">
+        <h2 class="text-center">¡Enhorabuena {{ request.User.username}}!</h2>
+            <p class="text-center">Tu cuenta ha sido creada con éxito
+            </p>
+            <p class="text-center"> <a style="text-decoration: underline; color: #fff" href="{% url 'login' %}" >Ahora puedes ingresar aquí </a></p>
+    </div>
+    
+</div>
+{% endblock %}

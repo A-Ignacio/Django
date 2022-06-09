@@ -7,7 +7,7 @@ Esta rama contiene los elementos propios o requeridos del Módulo 6, de la Activ
 * [Tecnologias Usadas](#Tecnologias)
 * [Instalacion](#Instalacion)
 * [Consideraciones](#Consideraciones)
-
++ [Actualización](#Actualizacion)
 
 <a name="Tecnologias"></a>
 ## Tecnologias
@@ -47,5 +47,24 @@ De lo último, aquello destacable es:
   Compartir: se utiliza para registrar el autor, título y enlace para compartir los libros.
   catálogo: Muestra los libros ingresados/almacenados.
   "Comunidad": Muestra los usuarios registrados, junto a información de interés.
+  
+<a name="Actualizacion"></a>
+## Actualización
+
+En esta versión del proyecto, se han incorporado permisos y restricciones.
+Se crearon dos grupos de permisos:
+*1.UsuariosComunes: Sólo puede subir libros y ver los que están almacenados. Puede acceder a las vistas de "Inicio", "Quiénes Somos", "Catálogo", "Compartir" y "Salir". Dentro de "Catálogo" no pueden editar* ni eliminar.
+  Cuentan con los usuarios: 
+  Pedro clave: Pedro123
+  Pablo clave: Pablo123
+  
+*2.UsuariosModeradores: Están registrados como Staff, y pueden editar y agregar libros, pueden ver el apartado de "Comunidad", además de los anteriormente mencioandos. En el apartado "Comunidad" pueden editar usuarios.
+Cuentan con los usuarios:
+Ale clave: Ale123
+Nico clave: Nico123
+
+Además, el administrador (usuario Admin) puede eliminar libros y usuarios, además de todos los permisos previamente mencionados.
+Cuenta con el usuario:
+Admin clave: Admin123
   
 Ningún derecho reservado, disponible para su copia, modificación y/o distribución en pos del aprendizaje.

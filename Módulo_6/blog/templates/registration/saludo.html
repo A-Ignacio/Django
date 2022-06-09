@@ -1,0 +1,17 @@
+{% extends "registration/layout.html" %}
+
+{% block content%}
+<div id="contenedor-qs">
+    <div id="q-s" class="p-3  bg-dark text-white opacity-75" style="margin: 20px">
+        <h2 class="text-center">¡Bienvenido {{ user.username}}, te extrañábamos!</h2>
+            <p class="text-center"></p>
+            <p class="text-center">Sesión iniciada el {{ user.last_login }}</p>
+            <p class="text-center">
+                <a style="text-decoration: underline; color: #fff" href="{% url 'registrar_libro' %}" >Puedes compartir</a>  
+                O  
+                <a style="text-decoration: underline; color: #fff" href="{% url 'catalogo' %}" >Puedes buscar</a>
+            </p>
+    </div>
+    
+</div>
+{% endblock %}

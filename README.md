@@ -54,9 +54,10 @@ De lo último, aquello destacable es:
 En esta versión del proyecto, se han incorporado permisos y restricciones.
 Se crearon dos grupos de permisos:
 *1.UsuariosComunes: Sólo puede subir libros y ver los que están almacenados. Puede acceder a las vistas de "Inicio", "Quiénes Somos", "Catálogo", "Compartir" y "Salir". Dentro de "Catálogo" no pueden editar* ni eliminar.
-  Cuentan con los usuarios: 
+
+  Cuentan con los usuarios:
   Pedro clave: Pedro123
-  Pablo clave: Pablo123
+  Pablo clave: Pablo123 
   
 *2.UsuariosModeradores: Están registrados como Staff, y pueden editar y agregar libros, pueden ver el apartado de "Comunidad", además de los anteriormente mencioandos. En el apartado "Comunidad" pueden editar usuarios.
 Cuentan con los usuarios:

@@ -1,0 +1,18 @@
+{% extends "registration/layout.html" %}
+{% load static %}
+<head> 
+    <link rel="stylesheet" href="{% static '/css/quienes-somos.css' %}"   type="text/css"> 
+</head>
+
+{% block content %}
+{% for comentario in data %} 
+<div id="contenedor-qs">
+    <div id="q-s" class="p-3  bg-dark text-white opacity-75" style="margin: 20px;">
+        <h4 class="text-start">{{comentario.id}}. {{ comentario.titulo}}</h4>
+            <p class="text-justify"> {{comentario.contenido}} 
+            </p>
+            <p class="text-end" style="margin: 0;"><a href="{% url 'filtrar_comentario' comentario.id%}">{{comentario.username}}</a>, el {{comentario.fecha}} <a href="{% url 'editar_comentario' comentario.id %}">Editar</a> <a href="{% url 'eliminar_comentario' comentario.id %}">Eliminar</a> </p>
+        </div>
+</div>
+{% endfor %}
+{% endblock %}

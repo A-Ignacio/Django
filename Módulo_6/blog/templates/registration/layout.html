@@ -29,6 +29,9 @@
                     <a class="btn btn-outline-light" aria-current="page" href="{% url 'registrar_libro' %}" id="form-contact">Compartir</a>
                 </li>
                 {% endif %}
+                <li class="nav-item ">
+                    <a class="btn btn-outline-light" aria-current="page" href="{% url 'registrar_comentario' %}" id="form-contact">Comentar</a>
+                </li>
                 <li id="contenedor-logo">
                     <a id="liveToastBtn" >
                         <img id="logo" src="https://img.freepik.com/foto-gratis/viejo-libro-abierto-sobre-fondo-madera-oscura_1373-581.jpg?t=st=1653185347~exp=1653185947~hmac=9b68cf210ed0c54ca30b6c14af635d509bfe7bd990c6fd6f400eec72503b7bad&w=900" alt="">
@@ -36,6 +39,9 @@
                 </li>
                 <li class="nav-item ">
                     <a class="btn btn-outline-light" aria-current="page" href="{% url 'catalogo' %}" id="form-contact">Catálogo</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="btn btn-outline-light" aria-current="page" href="{% url 'comentarios' %}" id="form-contact">Cometarios</a>
                 </li>
                 {% if user.is_staff %}
                 <li class="nav-item ">

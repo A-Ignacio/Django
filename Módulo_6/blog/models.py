@@ -14,3 +14,12 @@ class Libro(models.Model):
     def __str__(self):
         return self.titulo
 
+class Comentario(models.Model):
+    username = models.ForeignKey(User, verbose_name= "Usuario", on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=100)
+    contenido = models.TextField()
+    fecha = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.titulo
+    

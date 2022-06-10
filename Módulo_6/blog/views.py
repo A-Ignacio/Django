@@ -3,9 +3,9 @@ import operator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, redirect
-from .models import User, Libro
+from .models import User, Libro, Comentario
 from django.contrib.auth.forms import UserCreationForm
-from .forms import  UserRegisterForm, RegistrarLibro
+from .forms import  UserRegisterForm, RegistrarLibro, RegistrarComentario
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
@@ -73,6 +73,23 @@ def registrarLibro(request):
     return render (request, "registration/registrar_libro.html", {"form":form})
 
 @login_required
+def registrarComentario(request):
+    form = RegistrarComentario()
+    if request.method == "POST":
+        form = RegistrarComentario(request.POST)
+        if form.is_valid():
+            comentario = Comentario()
+            comentario.username = request.user
+            comentario.titulo = form.cleaned_data["titulo"]
+            comentario.contenido = form.cleaned_data["contenido"]
+            comentario.save()
+            return redirect('comentarios')
+        else:
+            print("No se ha podido registra el comentario")
+    return render(request, "registration/registrar_comentario.html", {"form":form})
+        
+
+@login_required
 def deletelibro(request, id):
     libro = Libro.objects.get(id=id)
     libro.delete()
@@ -88,3 +105,27 @@ def deleteUsuario(request, id):
 def salida(request):
     return render (request, "blog/salida.html")
 
+def comentarios(request):
+    comentario = Comentario.objects.all()
+    return render(request, 'blog/comentarios.html', {"data" : comentario})
+
+def editarComentario(request, id):
+    comentario = Comentario.objects.get(pk = id)
+    form = RegistrarComentario(instance = comentario)
+    if request.method == "POST":
+        form = RegistrarComentario(data = request.POST, instance = comentario)
+        form.save()
+        return redirect('/comentarios')
+    else:
+        return render (request, 'blog/editar_comentario.html', {"form": form})
+    
+
+def eliminarComentario(request, id):
+    comentario = Comentario.objects.get(pk = id)
+    comentario.delete()
+    messages.info(request, 'Comentario eliminado')
+    return redirect("/comentarios")
+
+def filtrarComentario(request, username):
+    username = Comentario.objects.filter(username = username)
+    return render(request, 'blog/filtrar.html', {"username" : username})

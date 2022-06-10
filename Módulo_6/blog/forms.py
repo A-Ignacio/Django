@@ -1,8 +1,10 @@
+from cProfile import label
 from dataclasses import field
+from tkinter import Widget
 from django import forms
-from django.forms import ModelForm
+from django.forms import ModelForm, Textarea
 from django.contrib.auth.models import User
-from .models import Libro
+from .models import Libro, Comentario
 from django.contrib.auth.forms import UserCreationForm 
 from django.contrib.auth.models import User
 
@@ -28,6 +30,15 @@ class RegistrarLibro(forms.Form):
     autor = forms.CharField(max_length=50, required = True)
     titulo = forms.CharField(max_length=50, required = True)
     enlace = forms.CharField(max_length=100, required = True)
+    
+class RegistrarComentario(forms.ModelForm):
+    titulo = forms.CharField(label = "Título", max_length=100, required=True)
+    contenido = forms.CharField(label = "Comentario", max_length=500, required=True, widget=Textarea)
+    
+    class Meta:
+        model = Comentario
+        fields = ['titulo', 'contenido']
+    
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()

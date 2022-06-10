@@ -2,13 +2,14 @@ from unicodedata import name
 from django import views
 from django.urls import path, include
 from . import views
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
     path("", views.inicio, name="inicio"),
     path("quienes-somos/",views.quienesSomos, name="quienes-somos"),
     path('register/', views.register, name='register'),
     path("login/", LoginView.as_view(template_name='login.html'), name = 'login'),
+    path("logout/", LogoutView.as_view(template_name='logout.html'), name = 'logout'),
     path("inicio/", views.iniciologgin, name="iniciologgin"),
     path("quienessomos/",views.quienesSomosR, name="quienes-somosLoggin"),
     path("catalogo/", views.catalogo, name="catalogo"),

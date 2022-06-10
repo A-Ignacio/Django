@@ -11,7 +11,7 @@
                 {% if user.is_staff %}
                 <th>Editar</th>
                 {% endif %}
-                {% if user.is_admin %}
+                {% if user.is_superuser %}
                 <th>Eliminar</th>
                 {% endif %}
             </tr>
@@ -26,8 +26,8 @@
                 {% if user.is_staff %}
                 <td><a href="/registration/update/{{ libro.id }}">Editar</a></td>
                 {% endif %}
-                {% if user.is_admin %}
-                <td><a href="/registration/delete/{{ libro.id }}">delete</a></td>
+                {% if user.is_superuser %}
+                <td><a href="/registration/delete/{{ libro.id }}">Eliminar</a></td>
                 {% endif %}
             </tr>
         </tbody>

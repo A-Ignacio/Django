@@ -1,15 +1,18 @@
+from multiprocessing import context
 import operator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, redirect
 from .models import User, Libro
-from .forms import  UserRegistrationForm, RegistrarLibro
+from django.contrib.auth.forms import UserCreationForm
+from .forms import  UserRegisterForm, RegistrarLibro
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime
+from django.contrib import messages
 
 
 # Create your views here.
@@ -22,16 +25,17 @@ def quienesSomos(request):
 
 def register(request):
     if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            new_user = user_form.save(commit=False)
-            new_user.set_password(user_form.cleaned_data['password'])
-            new_user.save()
-            return render(request, 'registration/register_done.html', {'new_user': user_form})
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            messages.success(request, f'Usuario {username} creado exitosamente')
+            return redirect('login')
     else:
-        user_form = UserRegistrationForm()
-    
-    return render(request, 'registration/register.html', {'user_form': user_form})
+        form = UserRegisterForm()
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)
+            
 
 @login_required
 def iniciologgin(request):

@@ -63,6 +63,7 @@ def registrarLibro(request):
             form = RegistrarLibro(request.POST)
             if form.is_valid():
                 libro=Libro()
+                libro.username = request.user
                 libro.autor=form.cleaned_data["autor"]
                 libro.titulo=form.cleaned_data["titulo"]
                 libro.enlace=form.cleaned_data["enlace"]

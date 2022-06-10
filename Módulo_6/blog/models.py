@@ -7,9 +7,11 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 class Libro(models.Model):
+    username = models.ForeignKey(User, verbose_name= "Usuario", on_delete=models.DO_NOTHING)
     autor = models.CharField(max_length=50)
     titulo = models.CharField(max_length=50)
     enlace = models.CharField(max_length=100)
+    fecha = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.titulo

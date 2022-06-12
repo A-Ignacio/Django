@@ -19,9 +19,9 @@
                 <td style="padding-top: 1.5%;">{{libro.username}}</td>
                 <td style="padding-top: 1.5%;">{{libro.autor}}</td>
                 <td style="padding-top: 1.5%;">{{libro.titulo}}</td>
-                <td><a class="btn btn-outline-success" href="{{libro.enlace}}">Descargar</a></td>
+                <td><a class="btn btn-success" href="{{libro.enlace}}">Descargar</a></td>
                 {% if user.is_staff %}
-                <td><a class="btn btn-outline-warning" href="/registration/update/{{ libro.id }}">Editar</a>
+                <td><a class="btn btn-outline-primary" href="/registration/update/{{ libro.id }}">Editar</a>
                 {% endif %}
                 {% if user.is_superuser %}
                     <a class="btn btn-outline-danger" href="/registration/delete/{{ libro.id }}">Eliminar</a>

@@ -28,7 +28,7 @@
                 <td style="padding-top: 1.5%;">{{usuario.is_active}}</td>
                 {% if user.is_staff %}
                 <td>
-                    <a class = "btn btn-outline-warning" href="/editar_usuario/{{ usuario.id }}">Editar</a>
+                    <a class = "btn btn-outline-primary" href="/editar_usuario/{{ usuario.id }}">Editar</a>
                 {% endif %}
                 {% if user.is_superuser %}
                     <a class = "btn btn-outline-danger" href="/blog/delete/{{ usuario.id }}">Eliminar</a>

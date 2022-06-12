@@ -4,33 +4,29 @@
     <table class='table table-hover'>
         <thead> 
             <tr>
-                <th >Id</th>
+                <th>Id</th>
                 <th>Subido por</th>
-                <th >Autor</th>
-                <th >Título</th>
-                <th>Enlace</th>
-                {% if user.is_staff %}
-                <th>Editar</th>
-                {% endif %}
-                {% if user.is_superuser %}
-                <th>Eliminar</th>
-                {% endif %}
+                <th>Autor</th>
+                <th>Título</th>
+                <th style="padding-left: 2%;">Enlace</th>
+                <th style="padding-left: 2%;">Acciones</th>
             </tr>
         </thead>
         {% for libro in data %}      
         <tbody>
             <tr>
-                <td>{{libro.id}}</td>
-                <td>{{libro.username}}</td>
-                <td>{{libro.autor}}</td>
-                <td>{{libro.titulo}}</td>
-                <td><a href="{{libro.enlace}}">Descargar</a></td>
+                <td style="padding-top: 1.5%;">{{libro.id}}</td>
+                <td style="padding-top: 1.5%;">{{libro.username}}</td>
+                <td style="padding-top: 1.5%;">{{libro.autor}}</td>
+                <td style="padding-top: 1.5%;">{{libro.titulo}}</td>
+                <td><a class="btn btn-outline-success" href="{{libro.enlace}}">Descargar</a></td>
                 {% if user.is_staff %}
-                <td><a href="/registration/update/{{ libro.id }}">Editar</a></td>
+                <td><a class="btn btn-outline-warning" href="/registration/update/{{ libro.id }}">Editar</a>
                 {% endif %}
                 {% if user.is_superuser %}
-                <td><a href="/registration/delete/{{ libro.id }}">Eliminar</a></td>
+                    <a class="btn btn-outline-danger" href="/registration/delete/{{ libro.id }}">Eliminar</a>
                 {% endif %}
+                </td>
             </tr>
         </tbody>
         {% endfor %}

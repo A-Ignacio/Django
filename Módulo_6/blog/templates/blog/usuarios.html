@@ -8,30 +8,31 @@
             <tr>
                 <th>Id</th>
                 <th>Nombre de usuario</th>
-                <th>Nombre</th>
                 <th>Correo electrónico</th>
                 <th>Fecha de registro</th>
                 <th>Último Ingreso</th>
                 <th>Es Administrador</th>
                 <th>Está Activo</th>
+                <th style="padding-left: 2%;">Acciones</th>
             </tr>
         </thead>
         {% for usuario in data %}      
         <tbody>
             <tr>
-                <td>{{usuario.id}}</td>
-                <td>{{usuario.username}}</td>
-                <td>{{usuario.first_name}}</td>
-                <td>{{usuario.email}}</td>
-                <td>{{usuario.date_joined}}</td>
-                <td>{{usuario.last_login}}</td>
-                <td>{{usuario.is_staff}}</td>
-                <td>{{usuario.is_active}}</td>
+                <td style="padding-top: 1.5%;">{{usuario.id}}</td>
+                <td style="padding-top: 1.5%;">{{usuario.username}}</td>
+                <td style="padding-top: 1.5%;">{{usuario.email}}</td>
+                <td style="padding-top: 1.5%;">{{usuario.date_joined}}</td>
+                <td style="padding-top: 1.5%;">{{usuario.last_login}}</td>
+                <td style="padding-top: 1.5%;">{{usuario.is_staff}}</td>
+                <td style="padding-top: 1.5%;">{{usuario.is_active}}</td>
                 {% if user.is_staff %}
-                <td><a href="/registration/update/{{ usuario.id }}">Editar</a></td>
+                <td>
+                    <a class = "btn btn-outline-warning" href="/editar_usuario/{{ usuario.id }}">Editar</a>
                 {% endif %}
                 {% if user.is_superuser %}
-                <td><a href="/blog/delete/{{ usuario.id }}">Eliminar</a></td>
+                    <a class = "btn btn-outline-danger" href="/blog/delete/{{ usuario.id }}">Eliminar</a>
+                </td>
                 {% endif %}
             </tr>
         </tbody>

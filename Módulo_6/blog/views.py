@@ -106,6 +106,9 @@ def deleteUsuario(request, id):
 def salida(request):
     return render (request, "blog/salida.html")
 
+def saludo(request):
+    return render (request, "registration/saludo.html")
+
 def comentarios(request):
     comentario = Comentario.objects.all()
     return render(request, 'blog/comentarios.html', {"data" : comentario})
@@ -120,6 +123,15 @@ def editarComentario(request, id):
     else:
         return render (request, 'blog/editar_comentario.html', {"form": form})
     
+def editarUsuario(request, id):
+    usuario = User.objects.get(pk = id)
+    form = UserRegisterForm(instance = usuario)
+    if request.method == "POST":
+        form = UserRegisterForm(data = request.POST, instance = usuario)
+        form.save()
+        return redirect('/usuarios')
+    else:
+        return render (request, 'blog/editar_usuario.html', {"form": form})
 
 def eliminarComentario(request, id):
     comentario = Comentario.objects.get(pk = id)

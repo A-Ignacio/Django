@@ -1,0 +1,15 @@
+{% extends "blog/layout.html" %}
+{% load static %}
+
+
+{% block content %}
+<div id="contenedor-qs">
+    <div id="q-s" class="p-3  bg-dark text-white opacity-75" style="margin: 20px">
+        <h2 class="text-center">Has finalizado tu sesión</h2>
+            <p class="text-center">¡Hasta luego!
+            </p>
+            <p>Puedes seleccionar <a href="{% url 'login' %}" >Aquí</a>para violver a entrar</p>
+    </div>
+    
+</div>
+{% endblock %}

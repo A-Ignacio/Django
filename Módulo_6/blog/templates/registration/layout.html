@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Mi Blog {% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+<body>
+    {% block navbar %}
+    <!-- Este apartado contiene los elemtnos del Navbar -->
+    <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
+        
+        <div id="barranav" class="container-fluid justify-content-center" >
+            <ul class="nav nav-pills">
+                
+                <li class="nav-item ">
+                    <a class="btn btn-outline-light" aria-current="page" href="{% url 'iniciologgin' %}" id="form-contact">Inicio</a>
+				</li>
+                <li class="nav-item ">
+                    <a class="btn btn-outline-light" aria-current="page" href="{% url 'quienes-somosLoggin' %}" id="form-contact">Quiénes Somos</a>
+				</li>
+                <li id="contenedor-logo">
+                    <a id="liveToastBtn" >
+                        <img id="logo" src="https://img.freepik.com/foto-gratis/viejo-libro-abierto-sobre-fondo-madera-oscura_1373-581.jpg?t=st=1653185347~exp=1653185947~hmac=9b68cf210ed0c54ca30b6c14af635d509bfe7bd990c6fd6f400eec72503b7bad&w=900" alt="">
+                    </a>  
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-outline-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Comunidad</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% if user.is_staff%}
+                        <li><a class="dropdown-item" href="{% url 'usuarios' %}">Lista de Miembros</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url 'comentarios' %}">Ver Comentarios</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'registrar_comentario' %}">Realizar Comentario</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="dropdown-toggle btn btn-outline-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Libros</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'catalogo' %}">Ver Catálogo</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'registrar_libro' %}">Registrar Libro</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'registrar_comentario' %}">Realizar Comentario</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+        </div>
+    </nav>
+    
+    <!-- Fin del NavBar -->
+    {% endblock %}
+    <!-- Este apartado contiene la funcionalidad del toast  -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">¡Atención!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">¡Próximamente, esta opción te permitirá conocer un libro al azar desde nuestro catálogo! 
+            </div>
+        </div>
+    </div>
+    <script>
+        const toastTrigger = document.getElementById('liveToastBtn')
+        const toastLiveExample = document.getElementById('liveToast')
+        if (toastTrigger) {toastTrigger.addEventListener('click', () => {const toast = new bootstrap.Toast(toastLiveExample)
+            toast.show()})}
+        </script>
+        <!-- Aquí termina el apartado de la funcionalidad del toast  -->    
+    {% block content%}
+    {% endblock %}
+    
+    
+    <!-- Inicio del Footer -->
+    <footer>
+        <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div id="barranav" class="container-fluid justify-content-justify" >
+                <ul class="nav nav-pills">
+                    <li class="nav-item ">
+                        <p class="text-center">Todos los Derechos Reservados ©</p>
+                    </li>
+                </ul>
+            </div>
+            <div id="barranav" class="container-fluid justify-content-end" >
+                <ul class="nav nav-pills">
+                    <li class="nav-item ">
+                        <button type="button" class="btn btn-dark" disabled>Sesión de: {{ user.username | upper }}</button>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="btn btn-outline-light" aria-current="page" href="../admin/" id="form-contact">Administración</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="btn btn-outline-light" aria-current="page" href="{% url 'logout' %}" id="form-contact">Salir</a>
+                    </li>
+                </ul>
+            </div>
+            
+        </nav>
+    </footer>
+    <!-- Fin del Footer -->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</html>

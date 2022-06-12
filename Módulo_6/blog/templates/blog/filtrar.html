@@ -1,0 +1,17 @@
+{% extends "registration/layout.html" %}
+{% load static %}
+<head> 
+    <link rel="stylesheet" href="{% static '/css/quienes-somos.css' %}"   type="text/css"> 
+</head>
+
+{% block content %}
+{% for comentario in username %} 
+<div id="contenedor-qs">
+    <div id="q-s" class="p-3  bg-dark text-white opacity-75" style="margin: 20px;">
+        <h4 class="text-start">{{comentario.username}}. {{ comentario.titulo}}</h4>
+            <p class="text-justify"> {{comentario.contenido}} 
+            
+        </div>
+</div>
+{% endfor %}
+{% endblock %}

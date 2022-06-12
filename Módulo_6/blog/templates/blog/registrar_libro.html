@@ -1,0 +1,18 @@
+{% extends "blog/layout.html" %}
+{% block content %}
+{% load static %}
+
+<div class="container-fluid justify-content-center">
+    <form action="" method="post">
+        <div class="text-center">
+            {% csrf_token %}
+            <h3> Comparta su libro </h3>
+
+            {{form.as_p}}
+            
+            <button id ="btn-registo-usuarios" class = "btn btn-outline-dark" type ="submit"> Compartir </button>
+        </div>
+    </form>
+
+</div>
+{% endblock %}

@@ -18,33 +18,21 @@
         <div id="barranav" class="container-fluid justify-content-center" >
             <ul class="nav nav-pills">
                 <li class="nav-item ">
-					<button type="button" class="btn btn-dark" disabled>{{ user.username | upper }}</button>
-				</li>
-                <li class="nav-item ">
                     <a class="btn btn-outline-light" aria-current="page" href="{% url 'inicio' %}" id="form-contact">Inicio</a>
 				</li>
                 <li class="nav-item ">
                     <a class="btn btn-outline-light" aria-current="page" href="{% url 'quienes-somos' %}" id="form-contact">Quiénes Somos</a>
 				</li>
-                <li class="nav-item ">
-                    <a class="btn btn-outline-light" aria-current="page" href="{% url 'usuarios' %}" id="form-contact">Catálogo</a>
-                </li>
                 <li id="contenedor-logo">
                     <a id="liveToastBtn" >
                         <img id="logo" src="https://img.freepik.com/foto-gratis/viejo-libro-abierto-sobre-fondo-madera-oscura_1373-581.jpg?t=st=1653185347~exp=1653185947~hmac=9b68cf210ed0c54ca30b6c14af635d509bfe7bd990c6fd6f400eec72503b7bad&w=900" alt="">
                     </a>  
                 </li>
                 <li class="nav-item ">
-                    <a class="btn btn-outline-light" aria-current="page" href="{% url 'usuarios' %}" id="form-contact">Comunidad</a>
-                </li>
-                <li class="nav-item ">
 					<a class="btn btn-outline-light" aria-current="page" href="{% url 'register' %}" id="form-contact">Crear cuenta</a>
 				</li>
                 <li class="nav-item ">
 					<a class="btn btn-outline-light" aria-current="page" href="{% url 'login' %}" id="form-contact">Ingresar</a>
-				</li>
-                <li class="nav-item ">
-					<a class="btn btn-outline-light" aria-current="page" href="{% url 'logout' %}" id="form-contact">Salir</a>
 				</li>
             </ul>
         </div>
@@ -78,7 +66,7 @@
     <footer>
         <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div id="barranav" class="container-fluid justify-content-center" >
-                <p class="text-center">Todos los derechos reservados</p>
+                <p class="text-center">Todos los Derechos Reservados ©</p>
             </div>
         </nav>
     </footer>

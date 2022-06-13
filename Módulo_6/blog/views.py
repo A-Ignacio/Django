@@ -1,75 +1,154 @@
+from multiprocessing import context
+import operator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, redirect
-from .models import Usuario, User
-from .forms import RegistrarUsuariosForm, UserRegistrationForm
-from django.contrib.auth.decorators import login_required
+from .models import User, Libro, Comentario
+from django.contrib.auth.forms import UserCreationForm
+from .forms import  UserRegisterForm, RegistrarLibro, RegistrarComentario
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.urls import reverse
+from datetime import datetime
+from django.contrib import messages
+
 
 # Create your views here.
 
 def inicio(request):
     return render (request, "blog/inicio.html")
 
-
 def quienesSomos(request):
     return render (request, "blog/quienesSomos.html")
 
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            messages.success(request, f'Usuario {username} creado exitosamente')
+            return redirect('login')
+    else:
+        form = UserRegisterForm()
+    context = {'form': form}
+    return render(request, 'registration/register.html', context)
+            
+
 @login_required
+def iniciologgin(request):
+    return render (request, "registration/inicio.html")
+
+@login_required
+def quienesSomosR(request):
+    return render (request, "registration/quienesSomosLoggin.html")
+
+@login_required
+@user_passes_test(operator.attrgetter("is_staff"))
 def usuarios(request):
     usuario = User.objects.all()
     return render(request, 'blog/usuarios.html', {"data":usuario})
-    
 
-def ingreso_usuarios(request):
-    form = RegistrarUsuariosForm()
-    
+@login_required
+def catalogo(request):
+    catalogo = Libro.objects.all()
+    return render(request, 'blog/catalogo.html', {"data":catalogo})
+
+@login_required
+def registrarLibro(request):
+    form = RegistrarLibro()
     if request.method == "POST":
-            form = RegistrarUsuariosForm(request.POST)
+            form = RegistrarLibro(request.POST)
             if form.is_valid():
-                usuario=Usuario()
-                usuario.nombre=form.cleaned_data["nombre"]
-                usuario.apellido=form.cleaned_data["apellido"]
-                usuario.correo=form.cleaned_data["correo"]
-                usuario.telefono=form.cleaned_data["télefono"]
-                usuario.ciudad=form.cleaned_data["ciudad"]
-                usuario.save()
-                return redirect('ingreso_usuarios')
+                libro=Libro()
+                libro.username = request.user
+                libro.autor=form.cleaned_data["autor"]
+                libro.titulo=form.cleaned_data["titulo"]
+                libro.enlace=form.cleaned_data["enlace"]
+                libro.save()
+                return redirect('catalogo')
             else:
-                print("No se ha podido ingresar el usuario, intente nuevamente")
+                print("No se ha podido registrar el libro, intente nuevamente")
+    return render (request, "registration/registrar_libro.html", {"form":form})
+
+@login_required
+def registrarComentario(request):
+    form = RegistrarComentario()
+    if request.method == "POST":
+        form = RegistrarComentario(request.POST)
+        if form.is_valid():
+            comentario = Comentario()
+            comentario.username = request.user
+            comentario.titulo = form.cleaned_data["titulo"]
+            comentario.contenido = form.cleaned_data["contenido"]
+            comentario.save()
+            return redirect('comentarios')
+        else:
+            print("No se ha podido registra el comentario")
+    return render(request, "registration/registrar_comentario.html", {"form":form})
         
-    return render (request, "blog/registrar_usuarios.html", {"form":form})
 
-def logout(request):
-    logout(request)
-    return redirect('inicio.html')
+@login_required
+def deletelibro(request, id):
+    libro = Libro.objects.get(id=id)
+    libro.delete()
+    return HttpResponseRedirect(reverse('catalogo'))
 
-def salida(request):
-    return render (request, "blog/salida.html")
-
-def register(request):
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            new_user = user_form.save(commit=False)
-            new_user.set_password(user_form.cleaned_data['password'])
-            new_user.save()
-            return render(request, 'registration/register_done.html', {'new_user': user_form})
-    else:
-            user_form = UserRegistrationForm()
-    return render(request, 'registration/register.html', {'user_form': user_form})
-    
-def delete(request, id):
-    user = User.objects.all.get(id=id)
+@login_required
+def deleteUsuario(request, id):
+    user = User.objects.get(id=id)
     user.delete()
     return HttpResponseRedirect(reverse('usuarios'))
 
 
-def update(request, id):
-    user = User.objects.all.get(id=id)
-    template = loader.get_template('update.html')
-    context = {'user': user,}
-    return HttpResponse(template.render(context, request))
+def salida(request):
+    return render (request, "blog/salida.html")
+
+def saludo(request):
+    return render (request, "registration/saludo.html")
+
+def comentarios(request):
+    comentario = Comentario.objects.all()
+    return render(request, 'blog/comentarios.html', {"data" : comentario})
+
+def editarComentario(request, id):
+    comentario = Comentario.objects.get(pk = id)
+    form = RegistrarComentario(instance = comentario)
+    if request.method == "POST":
+        form = RegistrarComentario(data = request.POST, instance = comentario)
+        form.save()
+        return redirect('/comentarios')
+    else:
+        return render (request, 'blog/editar_comentario.html', {"form": form})
+    
+def editarUsuario(request, id):
+    usuario = User.objects.get(pk = id)
+    form = UserRegisterForm(instance = usuario)
+    if request.method == "POST":
+        form = UserRegisterForm(data = request.POST, instance = usuario)
+        form.save()
+        return redirect('/usuarios')
+    else:
+        return render (request, 'blog/editar_usuario.html', {"form": form})
+    
+def editarLibro(request, id):
+    libro = Libro.objects.get(pk = id)
+    form = RegistrarLibro(instance = libro)
+    if request.method == "POST":
+        form = RegistrarLibro(data = request.POST, instance = libro)
+        form.save()
+        return redirect('/catalogo')
+    else:
+        return render (request, 'blog/editar_libro.html', {"form": form})
+
+def eliminarComentario(request, id):
+    comentario = Comentario.objects.get(pk = id)
+    comentario.delete()
+    messages.info(request, 'Comentario eliminado')
+    return redirect("/comentarios")
+
+def filtrarComentario(request, username):
+    username = Comentario.objects.filter(username = username)
+    return render(request, 'blog/filtrar.html', {"username" : username})

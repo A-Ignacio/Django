@@ -7,10 +7,10 @@
         <div >
             
             <h3> Cree su usuario </h3>
-
-            {{user_form.as_p}}
-            
             {% csrf_token %}
+            {{form.as_p}}
+            
+            
             <button id ="btn-registo-usuarios" class = "btn btn-outline-dark" type ="submit" value="Create my account"> Registrar </button>
         </div>
     </form>

@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'Módulo_6.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'USER': 'Admin',
+        'PASSWORD' : 'Admin123',
+        'HOST' : 'localhost',
+        'PORT' : 3306
     }
 }
 
@@ -106,9 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'es-cl'
+LANGUAGE_CODE = 'es-CL'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Santiago'
 
 USE_I18N = True
 
@@ -126,5 +130,5 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "blog/static"),)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = reverse_lazy('inicio')
+LOGIN_REDIRECT_URL = reverse_lazy('saludo')
 LOGOUT_REDIRECT_URL = reverse_lazy('salida')

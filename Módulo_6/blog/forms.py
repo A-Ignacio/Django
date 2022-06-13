@@ -26,10 +26,15 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Las contraseñas no coinciden')
         return cd['password2']
 
-class RegistrarLibro(forms.Form):
+class RegistrarLibro(forms.ModelForm):
     autor = forms.CharField(max_length=50, required = True)
     titulo = forms.CharField(max_length=50, required = True)
     enlace = forms.CharField(max_length=100, required = True)
+    
+    class Meta:
+        model = Libro
+        fields = ['autor', 'titulo', 'enlace']
+    
     
 class RegistrarComentario(forms.ModelForm):
     titulo = forms.CharField(label = "Título", max_length=100, required=True)

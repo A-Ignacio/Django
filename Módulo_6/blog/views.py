@@ -132,6 +132,16 @@ def editarUsuario(request, id):
         return redirect('/usuarios')
     else:
         return render (request, 'blog/editar_usuario.html', {"form": form})
+    
+def editarLibro(request, id):
+    libro = Libro.objects.get(pk = id)
+    form = RegistrarLibro(instance = libro)
+    if request.method == "POST":
+        form = RegistrarLibro(data = request.POST, instance = libro)
+        form.save()
+        return redirect('/catalogo')
+    else:
+        return render (request, 'blog/editar_libro.html', {"form": form})
 
 def eliminarComentario(request, id):
     comentario = Comentario.objects.get(pk = id)

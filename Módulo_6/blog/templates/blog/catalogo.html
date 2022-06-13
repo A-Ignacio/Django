@@ -21,7 +21,7 @@
                 <td style="padding-top: 1.5%;">{{libro.titulo}}</td>
                 <td><a class="btn btn-success" href="{{libro.enlace}}">Descargar</a></td>
                 {% if user.is_staff %}
-                <td><a class="btn btn-outline-primary" href="/registration/update/{{ libro.id }}">Editar</a>
+                <td><a class="btn btn-outline-primary" href="/editar_libro/{{ libro.id }}">Editar</a>
                 {% endif %}
                 {% if user.is_superuser %}
                     <a class="btn btn-outline-danger" href="/registration/delete/{{ libro.id }}">Eliminar</a>
